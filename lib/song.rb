@@ -1,5 +1,3 @@
-require 'pry'
-
 class Song
   attr_accessor :name, :artist_name
   @@all = []
@@ -15,20 +13,19 @@ class Song
   def self.create
     song = self.new
     song.save
-    return song
+    song
   end
 
   def self.new_by_name(name)
-    song = self.new
+    song = self.create
     song.name = name
-    return song
+    song
   end
 
   def self.create_by_name(name)
-    song = self.new
+    song = self.create
     song.name = name
-    song.save
-    return song
+    song
   end
 
   def self.find_by_name(name)
@@ -44,35 +41,19 @@ class Song
   end
 
   def self.new_from_filename(filename)
-    rows = filename.split(".mp3")
-    album = rows.collect do |row|
-      data = row.split(" - ")
-      artist_name = data[0]
-      name = data[1]
-
-      song = self.new
-      song.artist_name = artist_name
-      song.name = name
-      song.save
-      song
-    end
-    album[0]
+    album = filename.split(" - ")
+    song = self.create
+    song.artist_name = album[0]
+    song.name = album[1].chomp(".mp3")
+    song
   end
 
   def self.create_from_filename(filename)
-    rows = filename.split(".mp3")
-    album = rows.collect do |row|
-      data = row.split(" - ")
-      artist_name = data[0]
-      name = data[1]
-
-      song = self.new
-      song.artist_name = artist_name
-      song.name = name
-      song.save
-      song
-    end
-    album[0]
+    album = filename.split(" - ")
+    song = self.create
+    song.artist_name = album[0]
+    song.name = album[1].chomp(".mp3")
+    song
   end
 
   def self.destroy_all
