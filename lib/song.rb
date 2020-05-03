@@ -45,6 +45,14 @@ class Song
   end
   
   def self.new_from_filename(filename)
+    new_song = self.new
+    string_array = filename.split(/ - |\./)
+    new_song.artist_name = string_array[0]
+    new_song.name = string_array[1]
+    new_song
+
+    #binding.pry
+    
     # new_song = self.new
     # string_array = []
     # string_array = string.split(".")
@@ -54,14 +62,6 @@ class Song
     # new_song.artist_name = another_string_array[0]
     # new_song.name = another_string_array[1]
     # new_song
-
-    new_song = self.new
-    string_array = filename.split(/ - |\./)
-    new_song.artist_name = string_array[0]
-    new_song.name = string_array[1]
-    new_song
-
-    #binding.pry
   end
 
   def self.create_from_filename(filename)
