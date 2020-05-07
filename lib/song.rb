@@ -40,11 +40,31 @@ class Song
   end
 
   def self.find_by_name(name)
-    binding.pry
     # can find a song present in @@all by name   
-    @@all.each do |song|
-      
-    end
+    self.all.find {|song| song.name == name}
   end
 
+  def self.find_or_create_by_name(name)
+    # invokes .find_by_name and .create_by_name instead of repeating code 
+    self.find_by_name(name) ||
+    self.create_by_name(name)
+    # returns the existing Song object (doesn't create a new one) when provided the title of an existing Song
+  end
+
+  def self.alphabetical
+    self.all.sort_by {|song| song.name}
+  end
+
+  def self.new_from_filename(name)
+    # initializes a song and artist_name based on the filename format
+    new_file = name.split(" - ")
+    artist_name = new_file[0]
+    song_name = new_file[1]
+    song = self.new 
+    song.name = song_name
+    artist = self.new
+    artist.name = artist_name
+    
+    # binding.pry
+  end
 end
