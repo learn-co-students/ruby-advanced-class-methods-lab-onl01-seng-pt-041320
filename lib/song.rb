@@ -1,11 +1,6 @@
 class Song
-  attr_accessor :name, :artist, :artist_name
+  attr_accessor :name, :artist_name
   @@all = []
-
-  # def initialize(song, artist_name)
-  #   @song = song
-  #   @artist_name = artist_name
-  # end
 
   def self.all
     @@all
@@ -46,13 +41,6 @@ class Song
     alpha = self.all.sort_by {|song| song.name}
     alpha
   end
-  #
-  # def self.new_from_filename(name)
-  #   song = self.new
-  #   song.name = (name.split(" - ")[1].chomp(".mp3"))
-  #   @@all << song
-  #   song
-  # end
 
   def self.new_from_filename(filename)
     song_array = filename.split(" - ")
